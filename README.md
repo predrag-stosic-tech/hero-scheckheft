@@ -1,78 +1,48 @@
 # Hero Scheckheft
 
-Clickable concept prototype: a digital service book for buildings, shown as a native part of
-ProtocolHero. Frontend only. All data is fictitious; nothing is sent anywhere.
+**Jede abgeschlossene Einreichung wird automatisch zum Eintrag im digitalen Scheckheft des Objekts – beim Eigentümer.**
 
-Specification, plan and tasks: `specs/001-hero-scheckheft/`.
-Principles: `.specify/memory/constitution.md`.
+CTO Product Challenge für ProtocolHero · Predrag Stošić · Oktober 2026
 
-## Run
+> Konzept-Prototyp mit fiktiven Daten. Nur Frontend, kein Backend.
+
+## Links
+
+| | |
+|---|---|
+| Live-Prototyp | https://hero-scheckheft.vercel.app |
+| Video (5 Min.) | `<VIDEO-LINK>` |
+| Decision Memo (1 Seite) | [`docs/ProtocolHero_Decision-Memo_Stosic.pdf`](docs/ProtocolHero_Decision-Memo_Stosic.pdf) |
+| Architektur (2 Seiten) | [`docs/ProtocolHero_Architektur_Hero-Scheckheft.pdf`](docs/ProtocolHero_Architektur_Hero-Scheckheft.pdf) |
+| Präsentation | [`docs/Hero-Scheckheft_Praesentation.pptx`](docs/Hero-Scheckheft_Praesentation.pptx) |
+
+## Die Idee in 30 Sekunden
+
+ProtocolHero dokumentiert heute sauber beim Betrieb – beim Kunden endet der Nachweis als Einzel-PDF.
+Hero Scheckheft schließt den Kreis: Protokoll, Fotos, Rechnung und nächste Fälligkeit landen automatisch im Scheckheft des Objekts, über alle Betriebe hinweg. Der Eigentümer wird erinnert und fragt mit einem Tipp den nächsten Termin an – als Karte auf dem Board des Betriebs.
+
+**Eine Metrik:** Re-Booking-Rate – Anteil fälliger Prüfungen und Wartungen, die vor Fristablauf über das Scheckheft beim selben Betrieb beauftragt werden.
+
+## Demo in 60 Sekunden
+
+1. Ansicht **Betrieb** öffnen: unter „Heute“ die Einreichung *Prüfung elektrischer Anlagen – Lindenstraße 12* öffnen.
+2. **Abschließen** → Schalter „Ins Scheckheft des Kunden übertragen“ → **Abschließen und übertragen**.
+3. Rechts auf dem Handy von Familie Schneider: neuer Eintrag, Status „in Ordnung“, nächster Termin gesetzt.
+4. Bei **Heizungswartung** auf **Termin anfragen** → die Anfrage erscheint beim Betrieb.
+5. **Verkaufsmappe teilen** → Link und QR-Code für Makler und Käufer.
+6. Über die **Demo-Steuerung** (runder Button unten rechts): Stufen Kostenlos / Advanced / Pro, Ansichten wechseln, Demo zurücksetzen.
+
+## Spec-driven Development (GitHub Spec Kit)
+
+Der Prototyp wurde mit GitHub Spec Kit entwickelt: Constitution → Specify → Plan → Tasks → Implement.
+Die Artefakte liegen unter [`.specify/`](.specify/) und [`specs/`](specs/); die verwendeten Prompts unter [`docs/SPECKIT_PROMPTS.md`](docs/SPECKIT_PROMPTS.md).
+
+## Lokal starten
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173
+npm run dev     # http://localhost:5173
+npm run build   # statischer Build für Vercel
 ```
 
-```bash
-npm run typecheck
-npm run lint
-npm run test       # unit tests for the domain logic
-npm run build
-npm run preview    # http://localhost:4173, service worker active
-npm run test:e2e   # story 1 smoke test (needs: npx playwright install chromium)
-```
-
-## Surfaces
-
-| Address | Surface |
-|---------|---------|
-| `/betrieb` | Craftsman company (Elektro Stosic, SHK Becker) in the ProtocolHero shell |
-| `/eigentuemer` | Owner on desktop (Familie Schneider; Rheinblick Hausverwaltung on Pro) |
-| `/m` | Owner on the phone, installable |
-| `/share/:token` | Public read-only Verkaufsmappe |
-
-The round button at the bottom right opens the **Demo-Steuerung**: switch view, trigger
-incoming entries, set the plan, reset the demo.
-
-## Demo order
-
-Start with "Demo zurücksetzen" and a browser window at least 1440 px wide, so the phone
-preview is visible beside the Betrieb view.
-
-1. **S1** `/betrieb`: click "Prüfung elektrischer Anlagen – Lindenstraße 12" → "Abschließen"
-   → "Abschließen und übertragen". The entry appears in the phone preview.
-2. **S2** in the phone preview or on `/m`: Übersicht → Heizungswartung → "Termin anfragen" →
-   "Anfrage senden". Demo-Steuerung → "Betrieb · SHK Becker" → Board.
-   Then Demo-Steuerung → "SHK Becker sendet Wartungsbericht + Rechnung".
-3. **S3** `/m`: "Verkaufsmappe teilen" → "Link erstellen" → open the link or scan the QR code.
-4. **S4** `/eigentuemer`: "Weiteres Objekt hinzufügen" → upgrade to Advanced → open an object →
-   tab "Graph". Then "Portfolio" or "Frag dein Scheckheft" → upgrade to Pro.
-5. **S5** `/m`: "Dokument hinzufügen" → "Beispielrechnung verwenden" → "Übernehmen".
-
-Show S2 before triggering the SHK Becker entry: that entry is the Heizungswartung and moves
-its due date a year out.
-
-## Deploy
-
-Static build (`dist/`). `vercel.json` rewrites every path to `index.html`.
-
-```bash
-npx vercel --prod
-```
-
-The QR code of a Verkaufsmappe only works on another device when the prototype is served from
-a public address. After deploying, open the address once on the presentation machine while
-online; from then on it works offline.
-
-Deployed address: _not deployed yet_
-
-## Notes
-
-- State lives in `localStorage` under `hero-scheckheft`. Fixtures are rebuilt relative to
-  today on every load, so "fällig in 21 Tagen" stays true on any day.
-- Maintenance intervals are recommendations made up for the prototype. The prototype makes no
-  claim about norms or legal requirements.
-- The share token is neither secret nor signed. It demonstrates the sharing flow, not access
-  control.
-- Colours are defined only in `src/styles/tokens.css`; a lint rule rejects hex values in
-  components.
+**Stack:** Vite · React · TypeScript · Tailwind · Zustand (localStorage) · Mock-Daten · PWA.
