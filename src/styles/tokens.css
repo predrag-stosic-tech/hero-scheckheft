@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+/*
+ * Design tokens extracted from docs/reference-ui/reference-ui/*.png.
+ * This file is the only place where colour values are written.
+ * The default Tailwind palette is removed so components cannot use ad-hoc colours.
+ */
+@theme {
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --color-ink: #111111;
+  --color-muted: #6b6b6b;
+  --color-line: #e5e5e5;
+  --color-sidebar: #fafafa;
+  --color-tint: #f4f4f4;
+  --color-tint-strong: #ececec;
+  --color-primary: #171717;
+  --color-overlay: rgb(17 17 17 / 0.62);
+
+  --color-gold: #c2b27a;
+  --color-gold-strong: #b5a468;
+  --color-gold-tint: #f6f2e3;
+  --color-gold-ink: #6b5d22;
+
+  --color-success-bg: #e7f6ec;
+  --color-success: #17703c;
+  --color-success-icon: #1f8a4c;
+
+  --color-warn-bg: #fbf1d5;
+  --color-warn: #7a5600;
+
+  --color-danger: #d93f3f;
+  --color-danger-text: #c23030;
+  --color-danger-bg: #fcebeb;
+
+  --color-info-bg: #e8f1fd;
+  --color-info: #1d5fb8;
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --radius-card: 12px;
+  --radius-control: 8px;
+
+  --shadow-card: 0 1px 2px rgb(17 17 17 / 0.04), 0 1px 1px rgb(17 17 17 / 0.02);
+  --shadow-pop: 0 12px 32px rgb(17 17 17 / 0.14), 0 2px 6px rgb(17 17 17 / 0.06);
+
+  --animate-neu: neu-pulse 1.2s ease-in-out 5;
+  --animate-rise: rise 0.35s ease-out;
+
+  @keyframes neu-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgb(194 178 122 / 0.55);
+    }
+    50% {
+      box-shadow: 0 0 0 7px rgb(194 178 122 / 0);
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    /* Base size of the ProtocolHero app. */
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss03';
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.01em;
+  }
+  button,
+  a,
+  [role='button'],
+  [role='tab'],
+  [role='switch'] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  /* Visible focus for keyboard users on every interactive element. */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

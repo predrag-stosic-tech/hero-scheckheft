@@ -1,0 +1,9 @@
+# Only what `npm run build` needs is uploaded to Vercel.
+C:*
+docs
+specs
+.specify
+.claude
+tests
+test-results
+dist
