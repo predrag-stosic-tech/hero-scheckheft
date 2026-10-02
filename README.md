@@ -11,7 +11,7 @@ CTO Product Challenge für ProtocolHero · Predrag Stošić · Oktober 2026
 | | |
 |---|---|
 | Live-Prototyp | https://hero-scheckheft.vercel.app |
-| Video (5 Min.) | `https://drive.google.com/file/d/12_lG6vtDG5vL2hzrCex5gWdlHc_3BBLN/view?usp=drive_link` |
+| Video (5 Min.) | https://drive.google.com/file/d/12_lG6vtDG5vL2hzrCex5gWdlHc_3BBLN/view?usp=drive_link |
 | Decision Memo (1 Seite) | [`docs/ProtocolHero_Decision-Memo_Stosic.pdf`](docs/ProtocolHero_Decision-Memo_Stosic.pdf) |
 | Architektur (2 Seiten) | [`docs/ProtocolHero_Architektur_Hero-Scheckheft.pdf`](docs/ProtocolHero_Architektur_Hero-Scheckheft.pdf) |
 | Präsentation | [`docs/Hero-Scheckheft_Praesentation.pptx`](docs/Hero-Scheckheft_Praesentation.pptx) |
